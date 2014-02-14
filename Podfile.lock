@@ -17,11 +17,14 @@ PODS:
   - AFNetworking/Serialization (2.1.0)
   - AFNetworking/UIKit (2.1.0):
     - AFNetworking/NSURLConnection
+  - TouchXML (0.1)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
+  - TouchXML (~> 0.1)
 
 SPEC CHECKSUMS:
   AFNetworking: c7d7901a83f631414c7eda1737261f696101a5cd
+  TouchXML: 0fb977f0bdd2ce2e5d0790c80751769459708810
 
 COCOAPODS: 0.29.0
