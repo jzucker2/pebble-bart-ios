@@ -10,6 +10,9 @@
 
 @interface FirstViewController : UIViewController
 
+@property (nonatomic, strong) NSMutableArray *stations;
+
 - (IBAction)tapButton:(id)sender;
+- (IBAction)tapButton2:(id)sender;
 
 @end

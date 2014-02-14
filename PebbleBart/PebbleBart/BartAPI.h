@@ -7,10 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+@class BartStation;
 
 @interface BartAPI : NSObject
 
 + (instancetype) sharedInstance;
-- (void) getStations;
+- (NSMutableArray *) getStations;
+- (void) getETDForStation:(BartStation *)station;
 
 @end

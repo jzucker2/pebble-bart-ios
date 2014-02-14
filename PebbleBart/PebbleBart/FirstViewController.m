@@ -19,6 +19,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    _stations = [[NSMutableArray alloc] init];
 }
 
 - (void)didReceiveMemoryWarning
@@ -30,7 +31,13 @@
 - (IBAction)tapButton:(id)sender
 {
     BartAPI *bartAPI = [BartAPI sharedInstance];
-    [bartAPI getStations];
+    _stations = [bartAPI getStations];
+}
+
+- (IBAction)tapButton2:(id)sender
+{
+    BartAPI *bartAPI = [BartAPI sharedInstance];
+    [bartAPI getETDForStation:[_stations objectAtIndex:0]];
 }
 
 @end
