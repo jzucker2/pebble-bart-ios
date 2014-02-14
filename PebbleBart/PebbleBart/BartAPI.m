@@ -9,6 +9,7 @@
 #import "BartAPI.h"
 #import <AFNetworking.h>
 #import <TouchXML.h>
+#import "BartStation.h"
 
 @implementation BartAPI
 
@@ -49,10 +50,13 @@
                 [item setObject:[[node childAtIndex:counter] stringValue] forKey:[[node childAtIndex:counter] name]];
             }
             
-            [stationArray addObject:item];
+            [stationArray addObject:[[BartStation alloc] initWithDictionary:item]];
         }
         
         NSLog(@"stationArray is %@", stationArray);
+        for (BartStation *station in stationArray) {
+            NSLog(@"%@", [station description]);
+        }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
