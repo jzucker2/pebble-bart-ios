@@ -8,6 +8,7 @@
 
 #import "BartEstimate.h"
 #import "BartStation.h"
+#import "BartAPI.h"
 
 @implementation BartEstimate
 
@@ -16,18 +17,21 @@
     self = [super init];
     if (self) {
         _origin = originStation;
-        _color = [info objectForKey:@"color"];
-        _direction = [info objectForKey:@"direction"];
-        _length = [[info objectForKey:@"length"] integerValue];
-        _minutes = [[info objectForKey:@"minutes"] integerValue];
-        _platform = [[info objectForKey:@"platform"] integerValue];
+        BartAPI *bartapi = [BartAPI sharedInstance];
+        _destination = [bartapi.stations objectForKey:[info objectForKey:@"abbreviation"]];
+        NSDictionary *estimateInfo = [info objectForKey:@"estimate"];
+        _color = [estimateInfo objectForKey:@"color"];
+        _direction = [estimateInfo objectForKey:@"direction"];
+        _length = [[estimateInfo objectForKey:@"length"] integerValue];
+        _minutes = [[estimateInfo objectForKey:@"minutes"] integerValue];
+        _platform = [[estimateInfo objectForKey:@"platform"] integerValue];
     }
     return self;
 }
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"\nEstimate origin: %@\nEstimate destination: %@\nEstimate direction: %@\nEstimate length: %d\nEstimate minutes: %d\nEstimate platform: %d", _origin.name, _destination.name, _direction, _length, _minutes, _platform];
+    return [NSString stringWithFormat:@"\nEstimate origin: %@\nEstimate destination: %@\nEstimate direction: %@\nEstimate length: %ld\nEstimate minutes: %ld\nEstimate platform: %ld", _origin.name, _destination.name, _direction, (long)_length, (long)_minutes, (long)_platform];
 }
 
 

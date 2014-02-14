@@ -19,6 +19,7 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedMyManager = [[self alloc] init];
+        sharedMyManager.stations = [[NSMutableDictionary alloc] init];
     });
     return sharedMyManager;
 }
@@ -39,12 +40,12 @@
         //NSLog(@"Response string: %@", xmlString);
         //NSLog(@"+++++++++++++++++++++++++++++++");
         CXMLDocument *doc = [[CXMLDocument alloc] initWithXMLString:xmlString options:0 error:nil];
-        NSArray *stations = [doc nodesForXPath:@"//stations/station" error:nil];
-        NSLog(@"stations is %@", stations);
+        NSArray *stationsraw = [doc nodesForXPath:@"//stations/station" error:nil];
+        NSLog(@"stations is %@", stationsraw);
         NSLog(@"-------------------------------");
         
         //NSMutableArray *stationArray = [[NSMutableArray alloc] init];
-        for (CXMLElement *node in stations) {
+        for (CXMLElement *node in stationsraw) {
             NSMutableDictionary *item = [[NSMutableDictionary alloc] init];
             int counter;
             for(counter = 0; counter < [node childCount]; counter++) {
@@ -52,7 +53,9 @@
                 [item setObject:[[node childAtIndex:counter] stringValue] forKey:[[node childAtIndex:counter] name]];
             }
             
-            [stationArray addObject:[[BartStation alloc] initWithDictionary:item]];
+            BartStation *station = [[BartStation alloc] initWithDictionary:item];
+            [stationArray addObject:station];
+            [_stations setValue:station forKey:station.abbr];
         }
         
         NSLog(@"stationArray is %@", stationArray);
@@ -113,8 +116,8 @@
                     }
                     [item setValue:dicChild forKey:[childNode name]];
                     NSLog(@"greater item is %@", item);
-                    BartEstimate *estimate = [[BartEstimate alloc] initWithOrigin:station andInfo:dicChild];
-                    [estimateArray addObject:estimate];
+//                    BartEstimate *estimate = [[BartEstimate alloc] initWithOrigin:station andInfo:dicChild];
+//                    [estimateArray addObject:estimate];
                 }else
                 {
                     NSLog(@"normal item is %@", item);
@@ -123,6 +126,10 @@
 //                BartEstimate *estimate = [[BartEstimate alloc] initWithOrigin:station andInfo:item];
 //                [estimateArray addObject:estimate];
                 
+            }
+            for (NSDictionary *item in etdArray) {
+                BartEstimate *estimate = [[BartEstimate alloc] initWithOrigin:station andInfo:item];
+                [estimateArray addObject:estimate];
             }
         }
         NSLog(@"etdArray is %@", etdArray);

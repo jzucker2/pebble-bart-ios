@@ -11,6 +11,8 @@
 
 @interface BartAPI : NSObject
 
+@property (nonatomic, strong) NSMutableDictionary *stations;
+
 + (instancetype) sharedInstance;
 - (NSMutableArray *) getStations;
 - (void) getETDForStation:(BartStation *)station;
