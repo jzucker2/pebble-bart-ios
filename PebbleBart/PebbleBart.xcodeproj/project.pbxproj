@@ -25,6 +25,7 @@
 		975A8DEF18AE77BD00238ADE /* PebbleBartTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 975A8DEE18AE77BD00238ADE /* PebbleBartTests.m */; };
 		975A8DFE18AE7BCD00238ADE /* BartAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 975A8DFD18AE7BCD00238ADE /* BartAPI.m */; };
 		97F37C2618AE9A0A0027C274 /* BartStation.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F37C2518AE9A0A0027C274 /* BartStation.m */; };
+		97F37C2A18AEA7210027C274 /* BartEstimate.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F37C2918AEA7210027C274 /* BartEstimate.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,8 @@
 		975A8DFD18AE7BCD00238ADE /* BartAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BartAPI.m; sourceTree = "<group>"; };
 		97F37C2418AE9A0A0027C274 /* BartStation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BartStation.h; sourceTree = "<group>"; };
 		97F37C2518AE9A0A0027C274 /* BartStation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BartStation.m; sourceTree = "<group>"; };
+		97F37C2818AEA7210027C274 /* BartEstimate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BartEstimate.h; sourceTree = "<group>"; };
+		97F37C2918AEA7210027C274 /* BartEstimate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BartEstimate.m; sourceTree = "<group>"; };
 		DBC1277299244383950F5343 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = ../Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -128,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				975A8DCF18AE77BD00238ADE /* AppDelegate.h */,
+				97F37C2B18AEA7240027C274 /* BartEstimate */,
 				97F37C2718AE9A0E0027C274 /* BartStation */,
 				975A8DD018AE77BD00238ADE /* AppDelegate.m */,
 				975A8DFF18AE7BD100238ADE /* BartAPI */,
@@ -187,6 +191,15 @@
 				97F37C2518AE9A0A0027C274 /* BartStation.m */,
 			);
 			name = BartStation;
+			sourceTree = "<group>";
+		};
+		97F37C2B18AEA7240027C274 /* BartEstimate */ = {
+			isa = PBXGroup;
+			children = (
+				97F37C2818AEA7210027C274 /* BartEstimate.h */,
+				97F37C2918AEA7210027C274 /* BartEstimate.m */,
+			);
+			name = BartEstimate;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -326,6 +339,7 @@
 				975A8DD118AE77BD00238ADE /* AppDelegate.m in Sources */,
 				975A8DD718AE77BD00238ADE /* FirstViewController.m in Sources */,
 				975A8DFE18AE7BCD00238ADE /* BartAPI.m in Sources */,
+				97F37C2A18AEA7210027C274 /* BartEstimate.m in Sources */,
 				975A8DCD18AE77BD00238ADE /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

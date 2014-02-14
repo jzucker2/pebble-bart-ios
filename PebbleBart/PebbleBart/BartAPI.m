@@ -10,6 +10,7 @@
 #import <AFNetworking.h>
 #import <TouchXML.h>
 #import "BartStation.h"
+#import "BartEstimate.h"
 
 @implementation BartAPI
 
@@ -86,6 +87,7 @@
         NSLog(@"-------------------------------");
         
         NSMutableArray *etdArray = [[NSMutableArray alloc] init];
+        NSMutableArray *estimateArray = [[NSMutableArray alloc] init];
         for (CXMLElement *node in etds) {
             NSMutableDictionary *item = [[NSMutableDictionary alloc] init];
             int counter;
@@ -110,19 +112,25 @@
                         [dicChild setValue:[ChildItemNode stringValue] forKey:[ChildItemNode name]];
                     }
                     [item setValue:dicChild forKey:[childNode name]];
+                    NSLog(@"greater item is %@", item);
+                    BartEstimate *estimate = [[BartEstimate alloc] initWithOrigin:station andInfo:dicChild];
+                    [estimateArray addObject:estimate];
                 }else
                 {
+                    NSLog(@"normal item is %@", item);
                     [item setValue:[childNode stringValue] forKey:[childNode name]];
                 }
+//                BartEstimate *estimate = [[BartEstimate alloc] initWithOrigin:station andInfo:item];
+//                [estimateArray addObject:estimate];
                 
             }
         }
         NSLog(@"etdArray is %@", etdArray);
         
-//        NSLog(@"stationArray is %@", stationArray);
-//        for (BartStation *station in stationArray) {
-//            NSLog(@"%@", [station description]);
-//        }
+        NSLog(@"estimateArray is %@", estimateArray);
+        for (BartEstimate *estimate in estimateArray) {
+            NSLog(@"%@", [estimate description]);
+        }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
