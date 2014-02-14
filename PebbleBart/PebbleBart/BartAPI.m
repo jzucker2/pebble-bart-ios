@@ -40,6 +40,20 @@
         NSLog(@"stations is %@", stations);
         NSLog(@"-------------------------------");
         
+        NSMutableArray *stationArray = [[NSMutableArray alloc] init];
+        for (CXMLElement *node in stations) {
+            NSMutableDictionary *item = [[NSMutableDictionary alloc] init];
+            int counter;
+            for(counter = 0; counter < [node childCount]; counter++) {
+                //  common procedure: dictionary with keys/values from XML node
+                [item setObject:[[node childAtIndex:counter] stringValue] forKey:[[node childAtIndex:counter] name]];
+            }
+            
+            [stationArray addObject:item];
+        }
+        
+        NSLog(@"stationArray is %@", stationArray);
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
     }];
