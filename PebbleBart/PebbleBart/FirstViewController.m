@@ -7,6 +7,7 @@
 //
 
 #import "FirstViewController.h"
+#import "BartAPI.h"
 
 @interface FirstViewController ()
 
@@ -24,6 +25,12 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)tapButton:(id)sender
+{
+    BartAPI *bartAPI = [BartAPI sharedInstance];
+    [bartAPI getStations];
 }
 
 @end
