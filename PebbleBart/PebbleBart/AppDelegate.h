@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class PBWatch;
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (nonatomic, strong) PBWatch *targetWatch;
 
 @end
