@@ -1,0 +1,3 @@
+[submodule "pebble-bart"]
+	path = pebble-bart
+	url = https://github.com/jzucker2/pebble-bart.git
