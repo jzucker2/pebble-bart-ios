@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "BartAPI.h"
+#import <PebbleKit/PebbleKit.h>
 
 @implementation AppDelegate
 

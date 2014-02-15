@@ -27,6 +27,7 @@
 		97F37C2618AE9A0A0027C274 /* BartStation.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F37C2518AE9A0A0027C274 /* BartStation.m */; };
 		97F37C2A18AEA7210027C274 /* BartEstimate.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F37C2918AEA7210027C274 /* BartEstimate.m */; };
 		97F37C2F18AEF8830027C274 /* StationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F37C2E18AEF8830027C274 /* StationsViewController.m */; };
+		97F37C3218AEFCE90027C274 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97F37C3118AEFCE90027C274 /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +71,7 @@
 		97F37C2918AEA7210027C274 /* BartEstimate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BartEstimate.m; sourceTree = "<group>"; };
 		97F37C2D18AEF8830027C274 /* StationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StationsViewController.h; sourceTree = "<group>"; };
 		97F37C2E18AEF8830027C274 /* StationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StationsViewController.m; sourceTree = "<group>"; };
+		97F37C3118AEFCE90027C274 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		DBC1277299244383950F5343 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = ../Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -78,6 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				97F37C3218AEFCE90027C274 /* CoreLocation.framework in Frameworks */,
 				975A8DC318AE77BD00238ADE /* CoreGraphics.framework in Frameworks */,
 				975A8DC518AE77BD00238ADE /* UIKit.framework in Frameworks */,
 				975A8DC118AE77BD00238ADE /* Foundation.framework in Frameworks */,
@@ -121,6 +124,7 @@
 		975A8DBF18AE77BD00238ADE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				97F37C3118AEFCE90027C274 /* CoreLocation.framework */,
 				975A8DC018AE77BD00238ADE /* Foundation.framework */,
 				975A8DC218AE77BD00238ADE /* CoreGraphics.framework */,
 				975A8DC418AE77BD00238ADE /* UIKit.framework */,

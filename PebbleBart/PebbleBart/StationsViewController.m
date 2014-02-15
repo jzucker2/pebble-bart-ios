@@ -13,10 +13,22 @@
 @interface StationsViewController ()
 
 - (void) updateStations;
+- (void) setCheckmark:(BOOL)shouldCheck forCell:(UITableViewCell *)cell;
 
 @end
 
 @implementation StationsViewController
+
+- (void) setCheckmark:(BOOL)shouldCheck forCell:(UITableViewCell *)cell
+{
+    if (shouldCheck) {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    }
+    else {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
+    
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -136,5 +148,21 @@
 }
 
  */
+
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *oldSelectedCell = [self.tableView cellForRowAtIndexPath:_selectedStationIndexPath];
+    [self setCheckmark:NO forCell:oldSelectedCell];
+    _selectedStationIndexPath = indexPath;
+    NSString *stationName = [_stations objectAtIndex:_selectedStationIndexPath.row];
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:_selectedStationIndexPath];
+    [self setCheckmark:YES forCell:cell];
+    
+    NSLog(@"station is %@", stationName);
+    BartStation *station = [[[BartAPI sharedInstance] stations] objectForKey:stationName];
+    NSLog(@"%@", [station description]);
+    [[BartAPI sharedInstance] getETDsForStation:station];
+    
+}
 
 @end

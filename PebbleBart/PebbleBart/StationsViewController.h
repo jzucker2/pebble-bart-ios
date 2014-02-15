@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class BartStation;
+
 @interface StationsViewController : UITableViewController
 
 @property (nonatomic, strong) NSMutableArray *stations;
+@property (nonatomic, strong) NSIndexPath *selectedStationIndexPath;
 
 - (IBAction)refresh:(id)sender;
 
