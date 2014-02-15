@@ -10,4 +10,6 @@
 
 @interface SecondViewController : UIViewController
 
+- (IBAction)pebble:(id)sender;
+
 @end

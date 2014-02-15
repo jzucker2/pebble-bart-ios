@@ -24,9 +24,9 @@
     return sharedMyManager;
 }
 
-- (NSMutableArray *) getStations
+- (void) getStations
 {
-    __block NSMutableArray *stationArray = [[NSMutableArray alloc] init];
+    //__block NSMutableArray *stationArray = [[NSMutableArray alloc] init];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFXMLParserResponseSerializer new];
     //manager.responseSerializer = [AFHTTPResponseSerializer new];
@@ -54,22 +54,23 @@
             }
             
             BartStation *station = [[BartStation alloc] initWithDictionary:item];
-            [stationArray addObject:station];
+            //[stationArray addObject:station];
             [_stations setValue:station forKey:station.abbr];
-        }
-        
-        NSLog(@"stationArray is %@", stationArray);
-        for (BartStation *station in stationArray) {
             NSLog(@"%@", [station description]);
         }
+        
+//        NSLog(@"stationArray is %@", stationArray);
+//        for (BartStation *station in stationArray) {
+//            NSLog(@"%@", [station description]);
+//        }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
     }];
-    return stationArray;
+    //return stationArray;
 }
 
-- (void) getETDForStation:(BartStation *)station
+- (void) getETDsForStation:(BartStation *)station
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFXMLParserResponseSerializer new];

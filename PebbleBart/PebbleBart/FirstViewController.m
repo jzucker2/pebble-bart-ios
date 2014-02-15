@@ -31,13 +31,16 @@
 - (IBAction)tapButton:(id)sender
 {
     BartAPI *bartAPI = [BartAPI sharedInstance];
-    _stations = [bartAPI getStations];
+    [bartAPI getStations];
 }
 
 - (IBAction)tapButton2:(id)sender
 {
+    NSLog(@"tap button 2");
     BartAPI *bartAPI = [BartAPI sharedInstance];
-    [bartAPI getETDForStation:[_stations objectAtIndex:0]];
+    BartStation *station = [bartAPI.stations objectForKey:@"16TH"];
+    NSLog(@"stations is %@", station);
+    [bartAPI getETDsForStation:station];
 }
 
 @end

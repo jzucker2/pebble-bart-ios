@@ -7,6 +7,7 @@
 //
 
 #import "SecondViewController.h"
+#import <PebbleKit/PebbleKit.h>
 
 @interface SecondViewController ()
 
@@ -24,6 +25,14 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)pebble:(id)sender
+{
+    //[[PBPebbleCentral defaultCentral] setDelegate:self];
+    PBWatch *watch = [[PBPebbleCentral defaultCentral] lastConnectedWatch];
+    NSLog(@"watch is %@", watch);
+    
 }
 
 @end
