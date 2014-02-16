@@ -28,6 +28,9 @@
 		97F37C2A18AEA7210027C274 /* BartEstimate.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F37C2918AEA7210027C274 /* BartEstimate.m */; };
 		97F37C2F18AEF8830027C274 /* StationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F37C2E18AEF8830027C274 /* StationsViewController.m */; };
 		97F37C3218AEFCE90027C274 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97F37C3118AEFCE90027C274 /* CoreLocation.framework */; };
+		97F37C3518B152CE0027C274 /* StationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F37C3418B152CE0027C274 /* StationCell.m */; };
+		97F37C3918B156210027C274 /* EstimateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F37C3818B156210027C274 /* EstimateCell.m */; };
+		97F37C3D18B1568C0027C274 /* EstimatesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F37C3C18B1568C0027C274 /* EstimatesTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +75,12 @@
 		97F37C2D18AEF8830027C274 /* StationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StationsViewController.h; sourceTree = "<group>"; };
 		97F37C2E18AEF8830027C274 /* StationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StationsViewController.m; sourceTree = "<group>"; };
 		97F37C3118AEFCE90027C274 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		97F37C3318B152CE0027C274 /* StationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StationCell.h; sourceTree = "<group>"; };
+		97F37C3418B152CE0027C274 /* StationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StationCell.m; sourceTree = "<group>"; };
+		97F37C3718B156210027C274 /* EstimateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EstimateCell.h; sourceTree = "<group>"; };
+		97F37C3818B156210027C274 /* EstimateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EstimateCell.m; sourceTree = "<group>"; };
+		97F37C3B18B1568C0027C274 /* EstimatesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EstimatesTableViewController.h; sourceTree = "<group>"; };
+		97F37C3C18B1568C0027C274 /* EstimatesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EstimatesTableViewController.m; sourceTree = "<group>"; };
 		DBC1277299244383950F5343 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = ../Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -144,9 +153,12 @@
 				975A8DD218AE77BD00238ADE /* Main.storyboard */,
 				97F37C3018AEF8870027C274 /* StationsViewController */,
 				975A8DD518AE77BD00238ADE /* FirstViewController.h */,
+				97F37C3618B152D20027C274 /* StationCell */,
 				975A8DD618AE77BD00238ADE /* FirstViewController.m */,
 				975A8DD818AE77BD00238ADE /* SecondViewController.h */,
 				975A8DD918AE77BD00238ADE /* SecondViewController.m */,
+				97F37C3E18B1568F0027C274 /* Estimates */,
+				97F37C3A18B156230027C274 /* EstimateCell */,
 				975A8DDB18AE77BD00238ADE /* Images.xcassets */,
 				975A8DC718AE77BD00238ADE /* Supporting Files */,
 			);
@@ -225,6 +237,33 @@
 				97F37C2E18AEF8830027C274 /* StationsViewController.m */,
 			);
 			name = StationsViewController;
+			sourceTree = "<group>";
+		};
+		97F37C3618B152D20027C274 /* StationCell */ = {
+			isa = PBXGroup;
+			children = (
+				97F37C3318B152CE0027C274 /* StationCell.h */,
+				97F37C3418B152CE0027C274 /* StationCell.m */,
+			);
+			name = StationCell;
+			sourceTree = "<group>";
+		};
+		97F37C3A18B156230027C274 /* EstimateCell */ = {
+			isa = PBXGroup;
+			children = (
+				97F37C3718B156210027C274 /* EstimateCell.h */,
+				97F37C3818B156210027C274 /* EstimateCell.m */,
+			);
+			name = EstimateCell;
+			sourceTree = "<group>";
+		};
+		97F37C3E18B1568F0027C274 /* Estimates */ = {
+			isa = PBXGroup;
+			children = (
+				97F37C3B18B1568C0027C274 /* EstimatesTableViewController.h */,
+				97F37C3C18B1568C0027C274 /* EstimatesTableViewController.m */,
+			);
+			name = Estimates;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -362,11 +401,14 @@
 				975A8DDA18AE77BD00238ADE /* SecondViewController.m in Sources */,
 				97F37C2618AE9A0A0027C274 /* BartStation.m in Sources */,
 				975A8DD118AE77BD00238ADE /* AppDelegate.m in Sources */,
+				97F37C3D18B1568C0027C274 /* EstimatesTableViewController.m in Sources */,
 				975A8DD718AE77BD00238ADE /* FirstViewController.m in Sources */,
+				97F37C3518B152CE0027C274 /* StationCell.m in Sources */,
 				975A8DFE18AE7BCD00238ADE /* BartAPI.m in Sources */,
 				97F37C2A18AEA7210027C274 /* BartEstimate.m in Sources */,
 				975A8DCD18AE77BD00238ADE /* main.m in Sources */,
 				97F37C2F18AEF8830027C274 /* StationsViewController.m in Sources */,
+				97F37C3918B156210027C274 /* EstimateCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

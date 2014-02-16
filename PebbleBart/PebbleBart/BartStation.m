@@ -23,6 +23,8 @@
         _name = [info objectForKey:@"name"];
         _state = [info objectForKey:@"state"];
         _zipcode = [info objectForKey:@"zipcode"];
+        _northEstimates = [[NSMutableArray alloc] init];
+        _southEstimates = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -31,5 +33,15 @@
 {
     return [NSString stringWithFormat:@"\nStation name: %@\nStation abbr: %@\nStation address: %@\nStation city: %@\nStation county: %@\nStation state: %@\nStation gtfs_latitude: %@\nStation gtfs_longitude: %@\nStation zipcode: %@", _name, _abbr, _address,_city, _county, _state, _gtfs_latitude, _gtfs_longitude, _zipcode];
 }
+
+//- (NSMutableArray *) northEstimates
+//{
+//    
+//}
+//
+//- (NSMutableArray *) southEstimates
+//{
+//    
+//}
 
 @end

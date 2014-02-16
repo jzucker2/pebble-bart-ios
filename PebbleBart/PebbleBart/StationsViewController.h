@@ -15,6 +15,6 @@
 @property (nonatomic, strong) NSMutableArray *stations;
 @property (nonatomic, strong) NSIndexPath *selectedStationIndexPath;
 
-- (IBAction)refresh:(id)sender;
+- (void)refresh;
 
 @end

@@ -19,7 +19,12 @@
 @property (nonatomic, strong) NSString *county;
 @property (nonatomic, strong) NSString *gtfs_latitude;
 @property (nonatomic, strong) NSString *gtfs_longitude;
+@property (nonatomic, strong) NSMutableArray *northEstimates;
+@property (nonatomic, strong) NSMutableArray *southEstimates;
 
 - (instancetype) initWithDictionary:(NSDictionary *)info;
+
+//- (NSMutableArray *) northEstimates;
+//- (NSMutableArray *) southEstimates;
 
 @end

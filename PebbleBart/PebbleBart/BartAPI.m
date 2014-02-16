@@ -36,13 +36,13 @@
         NSData * data = operation.responseData;
         //NSString *xmlString = [NSString stringWithUTF8String:[data bytes]];
         NSString *xmlString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        NSLog(@"-------------------------------");
+        //NSLog(@"-------------------------------");
         //NSLog(@"Response string: %@", xmlString);
         //NSLog(@"+++++++++++++++++++++++++++++++");
         CXMLDocument *doc = [[CXMLDocument alloc] initWithXMLString:xmlString options:0 error:nil];
         NSArray *stationsraw = [doc nodesForXPath:@"//stations/station" error:nil];
-        NSLog(@"stations is %@", stationsraw);
-        NSLog(@"-------------------------------");
+        //NSLog(@"stations is %@", stationsraw);
+        //NSLog(@"-------------------------------");
         
         //NSMutableArray *stationArray = [[NSMutableArray alloc] init];
         for (CXMLElement *node in stationsraw) {
@@ -56,7 +56,7 @@
             BartStation *station = [[BartStation alloc] initWithDictionary:item];
             //[stationArray addObject:station];
             [_stations setValue:station forKey:station.abbr];
-            NSLog(@"%@", [station description]);
+            //NSLog(@"%@", [station description]);
         }
         
 //        NSLog(@"stationArray is %@", stationArray);
@@ -67,11 +67,14 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
     }];
+    NSLog(@"after blocks");
     //return stationArray;
 }
 
 - (void) getETDsForStation:(BartStation *)station
 {
+    [station.northEstimates removeAllObjects];
+    [station.southEstimates removeAllObjects];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFXMLParserResponseSerializer new];
     //manager.responseSerializer = [AFHTTPResponseSerializer new];
@@ -82,13 +85,13 @@
         NSData * data = operation.responseData;
         //NSString *xmlString = [NSString stringWithUTF8String:[data bytes]];
         NSString *xmlString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        NSLog(@"-------------------------------");
+        //NSLog(@"-------------------------------");
         //NSLog(@"Response string: %@", xmlString);
         //NSLog(@"+++++++++++++++++++++++++++++++");
         CXMLDocument *doc = [[CXMLDocument alloc] initWithXMLString:xmlString options:0 error:nil];
         NSArray *etds = [doc nodesForXPath:@"//station/etd" error:nil];
-        NSLog(@"etds is %@", etds);
-        NSLog(@"-------------------------------");
+        //NSLog(@"etds is %@", etds);
+        //NSLog(@"-------------------------------");
         
         NSMutableArray *etdArray = [[NSMutableArray alloc] init];
         NSMutableArray *estimateArray = [[NSMutableArray alloc] init];
@@ -116,29 +119,45 @@
                         [dicChild setValue:[ChildItemNode stringValue] forKey:[ChildItemNode name]];
                     }
                     [item setValue:dicChild forKey:[childNode name]];
-                    NSLog(@"greater item is %@", item);
-//                    BartEstimate *estimate = [[BartEstimate alloc] initWithOrigin:station andInfo:dicChild];
+                    //NSLog(@"greater item is %@", item);
+                    BartEstimate *estimate = [[BartEstimate alloc] initWithOrigin:station andInfo:item];
+                    if ([estimate.direction isEqualToString:@"North"]) {
+                        [station.northEstimates addObject:estimate];
+                    }
+                    else if ([estimate.direction isEqualToString:@"South"]) {
+                        [station.southEstimates addObject:estimate];
+                    }
 //                    [estimateArray addObject:estimate];
                 }else
                 {
-                    NSLog(@"normal item is %@", item);
+                    //NSLog(@"normal item is %@", item);
                     [item setValue:[childNode stringValue] forKey:[childNode name]];
                 }
 //                BartEstimate *estimate = [[BartEstimate alloc] initWithOrigin:station andInfo:item];
 //                [estimateArray addObject:estimate];
                 
             }
+            //NSLog(@"etdArray is %@", etdArray);
             for (NSDictionary *item in etdArray) {
                 BartEstimate *estimate = [[BartEstimate alloc] initWithOrigin:station andInfo:item];
                 [estimateArray addObject:estimate];
+                //[station.estimates addObject:estimate];
+//                if ([estimate.direction isEqualToString:@"North"]) {
+//                    [station.northEstimates addObject:estimate];
+//                }
+//                else if ([estimate.direction isEqualToString:@"South"]) {
+//                    [station.southEstimates addObject:estimate];
+//                }
             }
         }
-        NSLog(@"etdArray is %@", etdArray);
-        
-        NSLog(@"estimateArray is %@", estimateArray);
-        for (BartEstimate *estimate in estimateArray) {
-            NSLog(@"%@", [estimate description]);
-        }
+        //NSLog(@"etdArray is %@", etdArray);
+        NSLog(@"finished getting estimates");
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"finishedGettingEstimates" object:self];
+//        
+//        NSLog(@"estimateArray is %@", estimateArray);
+//        for (BartEstimate *estimate in estimateArray) {
+//            NSLog(@"%@", [estimate description]);
+//        }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);

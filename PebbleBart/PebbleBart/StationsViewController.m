@@ -9,6 +9,8 @@
 #import "StationsViewController.h"
 #import "BartAPI.h"
 #import "BartStation.h"
+#import "StationCell.h"
+#import "EstimatesTableViewController.h"
 
 @interface StationsViewController ()
 
@@ -45,10 +47,11 @@
     _stations = [[[[BartAPI sharedInstance] stations] allKeys] copy];
 }
 
-- (IBAction)refresh:(id)sender
+- (void)refresh
 {
     [self updateStations];
     [self.tableView reloadData];
+    [self.refreshControl endRefreshing];
 }
 
 - (void)viewDidLoad
@@ -56,6 +59,10 @@
     [super viewDidLoad];
     
     [self updateStations];
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
+    self.refreshControl = refreshControl;
+    
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -89,11 +96,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"StationCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    StationCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
     BartStation *station = [[[BartAPI sharedInstance] stations] objectForKey:[_stations objectAtIndex:indexPath.row]];
-    cell.textLabel.text = station.name;
+    cell.nameLabel.text = station.name;
     
     return cell;
 }
@@ -137,7 +144,7 @@
 }
 */
 
-/*
+
 #pragma mark - Navigation
 
 // In a story board-based application, you will often want to do a little preparation before navigation
@@ -145,18 +152,26 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"stationToEstimates"]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+        EstimatesTableViewController *destViewController = segue.destinationViewController;
+        //destViewController.recipeName = [recipes objectAtIndex:indexPath.row];
+        BartAPI *api = [BartAPI sharedInstance];
+        NSString *stationKey = [_stations objectAtIndex:indexPath.row];
+        destViewController.currentStation = [api.stations objectForKey:stationKey];
+        NSLog(@"transition");
+    }
 }
-
- */
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *oldSelectedCell = [self.tableView cellForRowAtIndexPath:_selectedStationIndexPath];
-    [self setCheckmark:NO forCell:oldSelectedCell];
+    //UITableViewCell *oldSelectedCell = [self.tableView cellForRowAtIndexPath:_selectedStationIndexPath];
+    [self.tableView deselectRowAtIndexPath:_selectedStationIndexPath animated:YES];
+    //[self setCheckmark:NO forCell:oldSelectedCell];
     _selectedStationIndexPath = indexPath;
     NSString *stationName = [_stations objectAtIndex:_selectedStationIndexPath.row];
-    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:_selectedStationIndexPath];
-    [self setCheckmark:YES forCell:cell];
+    //UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:_selectedStationIndexPath];
+    //[self setCheckmark:YES forCell:cell];
     
     NSLog(@"station is %@", stationName);
     BartStation *station = [[[BartAPI sharedInstance] stations] objectForKey:stationName];
