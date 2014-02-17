@@ -8,7 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+
 @class PBWatch;
+@class CLLocation;
+@class CLLocationManager;
 
 @protocol PebbleDelegate;
 
@@ -26,6 +29,8 @@ typedef enum {
 
 //@property (nonatomic, strong) PBWatch *targetWatch;
 @property (nonatomic, weak) id<PebbleDelegate>delegate;
+@property (nonatomic, strong) CLLocationManager *locationManager;
+@property (nonatomic, strong) CLLocation *currentLocation;
 
 + (instancetype) sharedInstance;
 - (void) setUp;

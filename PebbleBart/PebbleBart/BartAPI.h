@@ -7,11 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
 @class BartStation;
 
 @interface BartAPI : NSObject
 
 @property (nonatomic, strong) NSMutableDictionary *stations;
+@property (nonatomic, strong) BartStation *closestStation;
+@property (nonatomic, assign) CLLocationDistance closestStationDistance;
+@property (nonatomic, strong) BartStation *selectedStation;
 
 + (instancetype) sharedInstance;
 - (void) getStations;

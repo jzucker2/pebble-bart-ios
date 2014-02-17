@@ -95,6 +95,12 @@
     }
 }
 
+- (IBAction)closestStation:(id)sender
+{
+    NSLog(@"closestStation");
+    NSLog(@"closestStation is %@", [[BartAPI sharedInstance].closestStation description]);
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

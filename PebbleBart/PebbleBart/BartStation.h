@@ -7,6 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
+
+@class CLLocation;
 
 @interface BartStation : NSObject
 
@@ -24,6 +27,9 @@
 
 - (instancetype) initWithDictionary:(NSDictionary *)info;
 - (void) pushAllEstimatesToPhone;
+
+- (CLLocation *) location;
+- (CLLocationDistance) distanceFromCurrentLocation;
 
 //- (NSMutableArray *) northEstimates;
 //- (NSMutableArray *) southEstimates;

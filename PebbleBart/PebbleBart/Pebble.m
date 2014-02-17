@@ -8,8 +8,9 @@
 
 #import "Pebble.h"
 #import <PebbleKit/PebbleKit.h>
+#import <CoreLocation/CoreLocation.h>
 
-@interface Pebble () <PBPebbleCentralDelegate>
+@interface Pebble () <PBPebbleCentralDelegate, CLLocationManagerDelegate>
 
 - (void)setTargetWatch:(PBWatch *)watch;
 
@@ -26,6 +27,10 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedMyManager = [[self alloc] init];
+        if ([CLLocationManager locationServicesEnabled]) {
+            sharedMyManager.locationManager = [[CLLocationManager alloc] init];
+            sharedMyManager.locationManager.delegate = sharedMyManager;
+        }
         //sharedMyManager.stations = [[NSMutableDictionary alloc] init];
     });
     return sharedMyManager;
@@ -38,6 +43,17 @@
     
     // Initialize with the last connected watch:
     [self setTargetWatch:[[PBPebbleCentral defaultCentral] lastConnectedWatch]];
+    
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    [self findCurrentLocation];
+}
+
+- (void)findCurrentLocation
+{
+    if (([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorized) || ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined)) {
+        [self.locationManager startMonitoringSignificantLocationChanges];
+    }
+    //[self.locationManager startMonitoringSignificantLocationChanges];
 }
 
 - (void) setTargetWatch:(PBWatch *)watch
@@ -136,6 +152,40 @@
     return _targetWatch;
 }
 
+#pragma mark - CLLocationManagerDelegate
+
+- (void) locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
+{
+    NSLog(@"did change authorization status");
+}
+
+- (void) locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    NSLog(@"failed");
+}
+
+- (void) locationManager:(CLLocationManager *)manager didFinishDeferredUpdatesWithError:(NSError *)error
+{
+    NSLog(@"didFinish deferred updates with error");
+}
+
+- (void) locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+{
+    NSLog(@"didUpdateLocations");
+    CLLocation *mostRecentLocation = [locations lastObject];
+    _currentLocation = mostRecentLocation;
+    NSLog(@"mostRecentLocation is %@", mostRecentLocation);
+}
+
+- (void) locationManagerDidPauseLocationUpdates:(CLLocationManager *)manager
+{
+    NSLog(@"did pause");
+}
+
+- (void) locationManagerDidResumeLocationUpdates:(CLLocationManager *)manager
+{
+    NSLog(@"did resume");
+}
 
 
 @end

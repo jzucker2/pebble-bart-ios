@@ -114,7 +114,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="vwl-Vz-DRO">
-                        <barButtonItem key="leftBarButtonItem" systemItem="search" id="LhO-ZM-N2r"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="search" id="LhO-ZM-N2r">
+                            <connections>
+                                <action selector="closestStation:" destination="ceo-Mn-i2U" id="EKi-rE-Zgw"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Push" id="70s-Mr-9Pl">
                             <connections>
                                 <action selector="pushToPhone:" destination="ceo-Mn-i2U" id="1Bd-Yz-efv"/>

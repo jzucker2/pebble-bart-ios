@@ -10,6 +10,7 @@
 #import "BartEstimate.h"
 #import "Pebble.h"
 
+
 @implementation BartStation
 
 - (instancetype) initWithDictionary:(NSDictionary *)info
@@ -54,6 +55,16 @@
         [estimate pushToPhone];
         //[estimate performSelector:@selector(pushToPhone) withObject:nil afterDelay:1];
     }
+}
+
+- (CLLocation *) location
+{
+    return [[CLLocation alloc] initWithLatitude:[_gtfs_latitude doubleValue] longitude:[_gtfs_longitude doubleValue]];
+}
+
+- (CLLocationDistance)distanceFromCurrentLocation
+{
+    return [[self location] distanceFromLocation:[[Pebble sharedInstance] currentLocation]];
 }
 
 //- (NSMutableArray *) northEstimates

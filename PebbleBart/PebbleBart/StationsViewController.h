@@ -17,5 +17,6 @@
 
 - (void)refresh;
 - (IBAction)pushToPhone:(id)sender;
+- (IBAction)closestStation:(id)sender;
 
 @end

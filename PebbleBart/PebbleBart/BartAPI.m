@@ -11,6 +11,11 @@
 #import <TouchXML.h>
 #import "BartStation.h"
 #import "BartEstimate.h"
+#import "Pebble.h"
+
+@interface BartAPI ()
+
+@end
 
 @implementation BartAPI
 
@@ -56,7 +61,23 @@
             BartStation *station = [[BartStation alloc] initWithDictionary:item];
             //[stationArray addObject:station];
             [_stations setValue:station forKey:station.abbr];
-            //NSLog(@"%@", [station description]);
+            NSLog(@"%@", [station description]);
+            NSLog(@"station location: %@", [station location]);
+            if ([[Pebble sharedInstance] currentLocation]) {
+                CLLocationDistance distance = [station distanceFromCurrentLocation];
+                if (_closestStation == nil) {
+                    _closestStation = station;
+                    _closestStationDistance = distance;
+                }
+                else if (distance < _closestStationDistance) {
+                    _closestStation = station;
+                    _closestStationDistance = distance;
+                }
+                else {
+                    NSLog(@"other");
+                }
+                
+            }
         }
         
 //        NSLog(@"stationArray is %@", stationArray);
