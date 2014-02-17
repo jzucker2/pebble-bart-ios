@@ -65,10 +65,8 @@
     NSNumber *nameKey = @(1); // This is our custom-defined key for the temperature string.
     NSNumber *directionKey = @(2);
     NSNumber *appendKey = @(3);
-    //NSNumber *appendKey = @(0);
     NSDictionary *update = @{ minutesKey:[NSString stringWithFormat:@"%ld", (long)_minutes], nameKey:_destination.name, directionKey: _direction, appendKey: @(0)};
-    //NSDictionary *update = @{ minutesKey:[NSString stringWithFormat:@"%ld", (long)estimate.minutes]};
-    //NSDictionary *appendUpdate = @{appendKey: update};
+    
     
     [[Pebble sharedInstance] sendDictToPhone:update];
 }
