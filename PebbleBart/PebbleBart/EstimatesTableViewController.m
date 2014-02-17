@@ -172,34 +172,35 @@
         default:
             break;
     }
+    [estimate pushToPhone];
     
-    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-    PBWatch *targetWatch = appDelegate.targetWatch;
-    if (targetWatch == nil || [targetWatch isConnected] == NO) {
-        [[[UIAlertView alloc] initWithTitle:nil message:@"No connected watch!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-        return;
-    }
-    
-    // Send data to watch:
-    // See demos/feature_app_messages/weather.c in the native watch app SDK for the same definitions on the watch's end:
-    NSNumber *minutesKey = @(0); // This is our custom-defined key for the icon ID, which is of type uint8_t.
-    NSNumber *nameKey = @(1); // This is our custom-defined key for the temperature string.
-    NSNumber *directionKey = @(2);
-    NSNumber *appendKey = @(3);
-    //NSNumber *appendKey = @(0);
-    NSDictionary *update = @{ minutesKey:[NSString stringWithFormat:@"%ld", (long)estimate.minutes], nameKey:estimate.destination.name, directionKey: estimate.direction, appendKey: @(0)};
-    //NSDictionary *update = @{ minutesKey:[NSString stringWithFormat:@"%ld", (long)estimate.minutes]};
-    //NSDictionary *appendUpdate = @{appendKey: update};
-    
-    [targetWatch appMessagesPushUpdate:update onSent:^(PBWatch *watch, NSDictionary *update, NSError *error) {
-        //message = error ? [error localizedDescription] : @"Update sent!";
-        if (error != nil) {
-            NSLog(@"error");
-            NSLog(@" error => %@ ", [error localizedDescription]);
-        }
-        //showAlert();
-        NSLog(@"tried to send");
-    }];
+//    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+//    PBWatch *targetWatch = appDelegate.targetWatch;
+//    if (targetWatch == nil || [targetWatch isConnected] == NO) {
+//        [[[UIAlertView alloc] initWithTitle:nil message:@"No connected watch!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+//        return;
+//    }
+//    
+//    // Send data to watch:
+//    // See demos/feature_app_messages/weather.c in the native watch app SDK for the same definitions on the watch's end:
+//    NSNumber *minutesKey = @(0); // This is our custom-defined key for the icon ID, which is of type uint8_t.
+//    NSNumber *nameKey = @(1); // This is our custom-defined key for the temperature string.
+//    NSNumber *directionKey = @(2);
+//    NSNumber *appendKey = @(3);
+//    //NSNumber *appendKey = @(0);
+//    NSDictionary *update = @{ minutesKey:[NSString stringWithFormat:@"%ld", (long)estimate.minutes], nameKey:estimate.destination.name, directionKey: estimate.direction, appendKey: @(0)};
+//    //NSDictionary *update = @{ minutesKey:[NSString stringWithFormat:@"%ld", (long)estimate.minutes]};
+//    //NSDictionary *appendUpdate = @{appendKey: update};
+//    
+//    [targetWatch appMessagesPushUpdate:update onSent:^(PBWatch *watch, NSDictionary *update, NSError *error) {
+//        //message = error ? [error localizedDescription] : @"Update sent!";
+//        if (error != nil) {
+//            NSLog(@"error");
+//            NSLog(@" error => %@ ", [error localizedDescription]);
+//        }
+//        //showAlert();
+//        NSLog(@"tried to send");
+//    }];
 }
 
 /*

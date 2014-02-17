@@ -22,4 +22,6 @@
 
 - (instancetype) initWithOrigin:(BartStation *)originStation andInfo:(NSDictionary *)info;
 
+- (void) pushToPhone;
+
 @end
