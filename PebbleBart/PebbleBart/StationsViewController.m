@@ -146,11 +146,11 @@
 
 - (IBAction)pushToPhone:(id)sender
 {
-    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
     BartAPI *api = [BartAPI sharedInstance];
-    NSString *stationKey = [_stations objectAtIndex:indexPath.row];
+    NSString *stationKey = [_stations objectAtIndex:_selectedStationIndexPath.row];
     BartStation *currentStation = [api.stations objectForKey:stationKey];
-    [[BartAPI sharedInstance] getETDsForStation:currentStation];
+    //[[BartAPI sharedInstance] getETDsForStation:currentStation];
+    //sleep(2);
     [currentStation pushAllEstimatesToPhone];
 }
 
@@ -176,7 +176,7 @@
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //UITableViewCell *oldSelectedCell = [self.tableView cellForRowAtIndexPath:_selectedStationIndexPath];
-    [self.tableView deselectRowAtIndexPath:_selectedStationIndexPath animated:YES];
+    //[self.tableView deselectRowAtIndexPath:_selectedStationIndexPath animated:YES];
     //[self setCheckmark:NO forCell:oldSelectedCell];
     _selectedStationIndexPath = indexPath;
     NSString *stationName = [_stations objectAtIndex:_selectedStationIndexPath.row];
