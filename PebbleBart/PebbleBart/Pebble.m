@@ -48,12 +48,6 @@ typedef enum {
     
     // Initialize with the last connected watch:
     [self setTargetWatch:[[PBPebbleCentral defaultCentral] lastConnectedWatch]];
-    
-    id updateHandler = [_targetWatch appMessagesAddReceiveUpdateHandler:^BOOL(PBWatch *watch, NSDictionary *update) {
-        NSLog(@"update is %@", update);
-        return YES;
-    }];
-    NSLog(@"updateHandler is %@", updateHandler);
 }
 
 - (void) setTargetWatch:(PBWatch *)watch
@@ -79,6 +73,12 @@ typedef enum {
             
             NSString *message = [NSString stringWithFormat:@"Yay! %@ supports AppMessages :D", [watch name]];
             [[[UIAlertView alloc] initWithTitle:@"Connected!" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+            
+            id updateHandler = [_targetWatch appMessagesAddReceiveUpdateHandler:^BOOL(PBWatch *watch, NSDictionary *update) {
+                NSLog(@"update is %@", update);
+                return YES;
+            }];
+            NSLog(@"updateHandler is %@", updateHandler);
         } else {
             
             NSString *message = [NSString stringWithFormat:@"Blegh... %@ does NOT support AppMessages :'(", [watch name]];
