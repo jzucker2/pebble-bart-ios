@@ -185,8 +185,9 @@
     NSNumber *minutesKey = @(0); // This is our custom-defined key for the icon ID, which is of type uint8_t.
     NSNumber *nameKey = @(1); // This is our custom-defined key for the temperature string.
     NSNumber *directionKey = @(2);
+    NSNumber *appendKey = @(3);
     //NSNumber *appendKey = @(0);
-    NSDictionary *update = @{ minutesKey:[NSString stringWithFormat:@"%ld", (long)estimate.minutes], nameKey:estimate.destination.name, directionKey: estimate.direction};
+    NSDictionary *update = @{ minutesKey:[NSString stringWithFormat:@"%ld", (long)estimate.minutes], nameKey:estimate.destination.name, directionKey: estimate.direction, appendKey: @(0)};
     //NSDictionary *update = @{ minutesKey:[NSString stringWithFormat:@"%ld", (long)estimate.minutes]};
     //NSDictionary *appendUpdate = @{appendKey: update};
     
