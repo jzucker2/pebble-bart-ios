@@ -144,6 +144,16 @@
 }
 */
 
+- (IBAction)pushToPhone:(id)sender
+{
+    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+    BartAPI *api = [BartAPI sharedInstance];
+    NSString *stationKey = [_stations objectAtIndex:indexPath.row];
+    BartStation *currentStation = [api.stations objectForKey:stationKey];
+    [[BartAPI sharedInstance] getETDsForStation:currentStation];
+    [currentStation pushAllEstimatesToPhone];
+}
+
 
 #pragma mark - Navigation
 

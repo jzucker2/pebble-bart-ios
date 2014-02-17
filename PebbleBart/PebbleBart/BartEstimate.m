@@ -12,7 +12,27 @@
 #import "Pebble.h"
 #import <PebbleKit/PebbleKit.h>
 
+//enum {
+//    MINUTES_KEY,
+//    NAME_KEY,
+//    DIRECTION_KEY,
+//    APPEND_KEY,
+//    DELETE_KEY,
+//    FETCH_KEY,
+//    RESET_KEY,
+//};
+
 @implementation BartEstimate
+
+//typedef enum {
+//    MINUTES_KEY,
+//    NAME_KEY,
+//    DIRECTION_KEY,
+//    APPEND_KEY,
+//    DELETE_KEY,
+//    FETCH_KEY,
+//    RESET_KEY
+//} PebbleDictKeys;
 
 - (instancetype) initWithOrigin:(BartStation *)originStation andInfo:(NSDictionary *)info
 {
@@ -38,11 +58,6 @@
 
 - (void) pushToPhone
 {
-    PBWatch *targetWatch = [Pebble sharedInstance].targetWatch;
-    if (targetWatch == nil || [targetWatch isConnected] == NO) {
-        [[[UIAlertView alloc] initWithTitle:nil message:@"No connected watch!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-        return;
-    }
     
     // Send data to watch:
     // See demos/feature_app_messages/weather.c in the native watch app SDK for the same definitions on the watch's end:
@@ -51,19 +66,11 @@
     NSNumber *directionKey = @(2);
     NSNumber *appendKey = @(3);
     //NSNumber *appendKey = @(0);
-    NSDictionary *update = @{ minutesKey:[NSString stringWithFormat:@"%ld minutes", (long)_minutes], nameKey:_destination.name, directionKey: _direction, appendKey: @(0)};
+    NSDictionary *update = @{ minutesKey:[NSString stringWithFormat:@"%ld", (long)_minutes], nameKey:_destination.name, directionKey: _direction, appendKey: @(0)};
     //NSDictionary *update = @{ minutesKey:[NSString stringWithFormat:@"%ld", (long)estimate.minutes]};
     //NSDictionary *appendUpdate = @{appendKey: update};
     
-    [targetWatch appMessagesPushUpdate:update onSent:^(PBWatch *watch, NSDictionary *update, NSError *error) {
-        //message = error ? [error localizedDescription] : @"Update sent!";
-        if (error != nil) {
-            NSLog(@"error");
-            NSLog(@" error => %@ ", [error localizedDescription]);
-        }
-        //showAlert();
-        NSLog(@"tried to send");
-    }];
+    [[Pebble sharedInstance] sendDictToPhone:update];
 }
 
 

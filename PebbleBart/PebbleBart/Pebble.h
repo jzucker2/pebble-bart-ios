@@ -18,6 +18,8 @@
 - (void) setUp;
 
 - (PBWatch *) targetWatch;
+- (void) sendDictToPhone:(NSDictionary *)dict;
+- (void) sendResetTrigger;
 
 
 

@@ -23,6 +23,7 @@
 @property (nonatomic, strong) NSMutableArray *southEstimates;
 
 - (instancetype) initWithDictionary:(NSDictionary *)info;
+- (void) pushAllEstimatesToPhone;
 
 //- (NSMutableArray *) northEstimates;
 //- (NSMutableArray *) southEstimates;

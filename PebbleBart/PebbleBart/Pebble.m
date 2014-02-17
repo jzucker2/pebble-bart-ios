@@ -21,6 +21,16 @@
     PBWatch *_targetWatch;
 }
 
+typedef enum {
+    MINUTES_KEY,
+    NAME_KEY,
+    DIRECTION_KEY,
+    APPEND_KEY,
+    DELETE_KEY,
+    FETCH_KEY,
+    RESET_KEY
+} PebbleDictKeys;
+
 + (instancetype)sharedInstance {
     static Pebble *sharedMyManager = nil;
     static dispatch_once_t onceToken;
@@ -69,6 +79,42 @@
             [[[UIAlertView alloc] initWithTitle:@"Connected..." message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
         }
     }];
+}
+
+- (void) sendDictToPhone:(NSDictionary *)dict
+{
+    if (_targetWatch == nil || [_targetWatch isConnected] == NO) {
+        [[[UIAlertView alloc] initWithTitle:nil message:@"No connected watch!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+        return;
+    }
+    
+    //NSDictionary *update = @{ minutesKey:[NSString stringWithFormat:@"%ld", (long)estimate.minutes]};
+    //NSDictionary *appendUpdate = @{appendKey: update};
+    NSLog(@"dict to send is %@", dict);
+    [_targetWatch appMessagesPushUpdate:dict onSent:^(PBWatch *watch, NSDictionary *update, NSError *error) {
+        //message = error ? [error localizedDescription] : @"Update sent!";
+        if (error != nil) {
+            NSLog(@"error");
+            NSLog(@"update dict that failed: %@", update);
+            NSLog(@" error => %@ ", [error localizedDescription]);
+            NSLog(@"localizedFailureReason => %@", [error localizedFailureReason]);
+            NSLog(@"code => %ld", (long)[error code]);
+            
+            NSLog(@"domain => %@", [error domain]);
+            NSLog(@"userInfo => %@", [error userInfo]);
+            
+            
+        }
+        //showAlert();
+        NSLog(@"tried to send");
+    }];
+}
+
+- (void) sendResetTrigger
+{
+    NSNumber *resetKey = @(RESET_KEY);
+    NSDictionary *resetDict = @{resetKey: @(0)};
+    [self sendDictToPhone:resetDict];
 }
 
 #pragma mark - PBPebbleCentral delegate methods

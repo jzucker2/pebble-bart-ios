@@ -7,6 +7,8 @@
 //
 
 #import "BartStation.h"
+#import "BartEstimate.h"
+#import "Pebble.h"
 
 @implementation BartStation
 
@@ -32,6 +34,26 @@
 - (NSString *)description
 {
     return [NSString stringWithFormat:@"\nStation name: %@\nStation abbr: %@\nStation address: %@\nStation city: %@\nStation county: %@\nStation state: %@\nStation gtfs_latitude: %@\nStation gtfs_longitude: %@\nStation zipcode: %@", _name, _abbr, _address,_city, _county, _state, _gtfs_latitude, _gtfs_longitude, _zipcode];
+}
+
+- (void) pushAllEstimatesToPhone
+{
+    [[Pebble sharedInstance] sendResetTrigger];
+    sleep(1);
+    NSLog(@"do north estimates");
+    for (BartEstimate *estimate in _northEstimates) {
+        NSLog(@"estimate description is %@", [estimate description]);
+        sleep(1);
+        [estimate pushToPhone];
+        //[estimate performSelector:@selector(pushToPhone) withObject:nil afterDelay:1];
+    }
+    NSLog(@"now do south estimates");
+    for (BartEstimate *estimate in _southEstimates) {
+        NSLog(@"estimate description is %@", [estimate description]);
+        sleep(1);
+        [estimate pushToPhone];
+        //[estimate performSelector:@selector(pushToPhone) withObject:nil afterDelay:1];
+    }
 }
 
 //- (NSMutableArray *) northEstimates

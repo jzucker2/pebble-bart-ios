@@ -16,5 +16,6 @@
 @property (nonatomic, strong) NSIndexPath *selectedStationIndexPath;
 
 - (void)refresh;
+- (IBAction)pushToPhone:(id)sender;
 
 @end

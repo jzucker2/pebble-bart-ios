@@ -155,24 +155,27 @@
 
 - (IBAction)sendToWatch:(id)sender
 {
-    NSIndexPath *selectedIndexPath = [self.tableView indexPathForSelectedRow];
-    BartEstimate *estimate;
-    switch (selectedIndexPath.section) {
-        case 0:
-        {
-            estimate = [_northEstimatesArray objectAtIndex:selectedIndexPath.row];
-        }
-            break;
-        case 1:
-        {
-            estimate = [_southEstimatesArray objectAtIndex:selectedIndexPath.row];
-        }
-            break;
-            
-        default:
-            break;
-    }
-    [estimate pushToPhone];
+    [_currentStation pushAllEstimatesToPhone];
+//    NSIndexPath *selectedIndexPath = [self.tableView indexPathForSelectedRow];
+//    BartEstimate *estimate;
+//    switch (selectedIndexPath.section) {
+//        case 0:
+//        {
+//            estimate = [_northEstimatesArray objectAtIndex:selectedIndexPath.row];
+//        }
+//            break;
+//        case 1:
+//        {
+//            estimate = [_southEstimatesArray objectAtIndex:selectedIndexPath.row];
+//        }
+//            break;
+//            
+//        default:
+//            break;
+//    }
+//    [estimate pushToPhone];
+    
+
     
 //    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
 //    PBWatch *targetWatch = appDelegate.targetWatch;
