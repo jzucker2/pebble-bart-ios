@@ -184,8 +184,9 @@
     // See demos/feature_app_messages/weather.c in the native watch app SDK for the same definitions on the watch's end:
     NSNumber *minutesKey = @(0); // This is our custom-defined key for the icon ID, which is of type uint8_t.
     NSNumber *nameKey = @(1); // This is our custom-defined key for the temperature string.
+    NSNumber *directionKey = @(2);
     //NSNumber *appendKey = @(0);
-    NSDictionary *update = @{ minutesKey:[NSString stringWithFormat:@"%ld", (long)estimate.minutes], nameKey:estimate.destination.name};
+    NSDictionary *update = @{ minutesKey:[NSString stringWithFormat:@"%ld", (long)estimate.minutes], nameKey:estimate.destination.name, directionKey: estimate.direction};
     //NSDictionary *update = @{ minutesKey:[NSString stringWithFormat:@"%ld", (long)estimate.minutes]};
     //NSDictionary *appendUpdate = @{appendKey: update};
     
