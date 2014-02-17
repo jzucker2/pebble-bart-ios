@@ -51,6 +51,7 @@
 {
     [self updateStations];
     [self.tableView reloadData];
+    [self.tableView selectRowAtIndexPath:_selectedStationIndexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
     [self.refreshControl endRefreshing];
 }
 
@@ -62,6 +63,8 @@
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
     self.refreshControl = refreshControl;
+    //_selectedStationIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    [self.tableView selectRowAtIndexPath:_selectedStationIndexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
     
 
     // Uncomment the following line to preserve selection between presentations.

@@ -64,6 +64,7 @@
     
     _northEstimatesArray = [[NSMutableArray alloc] init];
     _southEstimatesArray = [[NSMutableArray alloc] init];
+
     
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];

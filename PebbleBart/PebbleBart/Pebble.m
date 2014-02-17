@@ -48,6 +48,12 @@ typedef enum {
     
     // Initialize with the last connected watch:
     [self setTargetWatch:[[PBPebbleCentral defaultCentral] lastConnectedWatch]];
+    
+    id updateHandler = [_targetWatch appMessagesAddReceiveUpdateHandler:^BOOL(PBWatch *watch, NSDictionary *update) {
+        NSLog(@"update is %@", update);
+        return YES;
+    }];
+    NSLog(@"updateHandler is %@", updateHandler);
 }
 
 - (void) setTargetWatch:(PBWatch *)watch
