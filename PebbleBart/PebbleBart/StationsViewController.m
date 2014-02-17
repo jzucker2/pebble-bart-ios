@@ -11,8 +11,9 @@
 #import "BartStation.h"
 #import "StationCell.h"
 #import "EstimatesTableViewController.h"
+#import "Pebble.h"
 
-@interface StationsViewController ()
+@interface StationsViewController () <PebbleDelegate>
 
 - (void) updateStations;
 - (void) setCheckmark:(BOOL)shouldCheck forCell:(UITableViewCell *)cell;
@@ -65,8 +66,9 @@
     self.refreshControl = refreshControl;
     //_selectedStationIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     [self.tableView selectRowAtIndexPath:_selectedStationIndexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
-    
 
+    
+    [[Pebble sharedInstance] setDelegate:self];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -78,6 +80,19 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void) didReceivePebbleUpdate:(NSDictionary *)update fromWatch:(PBWatch *)watch
+{
+    if ([update objectForKey:@(FETCH_KEY)]) {
+        NSLog(@"fetch!");
+        BartAPI *api = [BartAPI sharedInstance];
+        NSString *stationKey = [_stations objectAtIndex:_selectedStationIndexPath.row];
+        BartStation *currentStation = [api.stations objectForKey:stationKey];
+        //[[BartAPI sharedInstance] getETDsForStation:currentStation];
+        //sleep(2);
+        [currentStation pushAllEstimatesToPhone];
+    }
 }
 
 #pragma mark - Table view data source

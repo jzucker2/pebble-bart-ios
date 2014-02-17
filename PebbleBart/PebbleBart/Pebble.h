@@ -10,9 +10,22 @@
 
 @class PBWatch;
 
+@protocol PebbleDelegate;
+
+typedef enum {
+    MINUTES_KEY,
+    NAME_KEY,
+    DIRECTION_KEY,
+    APPEND_KEY,
+    DELETE_KEY,
+    FETCH_KEY,
+    RESET_KEY
+} PebbleDictKeys;
+
 @interface Pebble : NSObject
 
 //@property (nonatomic, strong) PBWatch *targetWatch;
+@property (nonatomic, weak) id<PebbleDelegate>delegate;
 
 + (instancetype) sharedInstance;
 - (void) setUp;
@@ -21,6 +34,11 @@
 - (void) sendDictToPhone:(NSDictionary *)dict;
 - (void) sendResetTrigger;
 
+@end
 
+@protocol PebbleDelegate <NSObject>
+
+@optional
+- (void) didReceivePebbleUpdate:(NSDictionary *)update fromWatch:(PBWatch *)watch;
 
 @end

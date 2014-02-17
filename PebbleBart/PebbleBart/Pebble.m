@@ -21,16 +21,6 @@
     PBWatch *_targetWatch;
 }
 
-typedef enum {
-    MINUTES_KEY,
-    NAME_KEY,
-    DIRECTION_KEY,
-    APPEND_KEY,
-    DELETE_KEY,
-    FETCH_KEY,
-    RESET_KEY
-} PebbleDictKeys;
-
 + (instancetype)sharedInstance {
     static Pebble *sharedMyManager = nil;
     static dispatch_once_t onceToken;
@@ -73,9 +63,14 @@ typedef enum {
             
             NSString *message = [NSString stringWithFormat:@"Yay! %@ supports AppMessages :D", [watch name]];
             [[[UIAlertView alloc] initWithTitle:@"Connected!" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-            
             id updateHandler = [_targetWatch appMessagesAddReceiveUpdateHandler:^BOOL(PBWatch *watch, NSDictionary *update) {
                 NSLog(@"update is %@", update);
+//                if ([update objectForKey:[NSNumber numberWithInt:FETCH_KEY]]) {
+//                    NSLog(@"fetch!");
+//                }
+                if ([self.delegate respondsToSelector:@selector(didReceivePebbleUpdate:fromWatch:)]) {
+                    [self.delegate didReceivePebbleUpdate:update fromWatch:watch];
+                }
                 return YES;
             }];
             NSLog(@"updateHandler is %@", updateHandler);
