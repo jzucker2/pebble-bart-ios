@@ -17,11 +17,15 @@ PODS:
   - AFNetworking/Serialization (2.1.0)
   - AFNetworking/UIKit (2.1.0):
     - AFNetworking/NSURLConnection
+  - MagicalRecord (2.2):
+    - MagicalRecord/Core
+  - MagicalRecord/Core (2.2)
   - PebbleKit (2.0.0)
   - TouchXML (0.1)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
+  - MagicalRecord (~> 2.2)
   - PebbleKit (from `~/pebble-dev/PebbleSDK-2.0.0/PebbleKit-iOS`)
   - TouchXML (~> 0.1)
 
@@ -31,6 +35,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AFNetworking: c7d7901a83f631414c7eda1737261f696101a5cd
+  MagicalRecord: 95d49d74ef752cd52f6ad87bcb474817fc3978cf
   PebbleKit: 271d0192f82ab0409d83a68ba77006abba15341d
   TouchXML: 0fb977f0bdd2ce2e5d0790c80751769459708810
 
